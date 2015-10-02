@@ -1,0 +1,21 @@
+<% Post.group_by_entities.each do |entity, attrs| %>
+  <div class="card">
+    <h2><%= entity %> <%= attrs[:relevance] %></h2>
+    <%= render attrs[:posts] %>
+  </div>
+<% end %>
+
+
+<% by_category = @posts.group_by(&:main_category) %>
+<ul>
+  <% by_category.each do |category, posts| %>
+    <li><a href="#<%= category || "NULL" %>"><%= category || "NULL" %></a></li>
+  <% end %>
+</ul>
+
+<% by_category.each do |category, posts| %>
+  <a name="<%= category %>"></a>
+
+  <h1><%= category %></h1>
+  <%= render posts %>
+<% end %>
